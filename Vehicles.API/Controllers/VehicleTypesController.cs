@@ -1,10 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
+using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using Vehicles.API.Data;
 using Vehicles.API.Data.Entities;
 
@@ -54,13 +52,36 @@ namespace Vehicles.API.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Description")] VehicleType vehicleType)
+        public async Task<IActionResult> Create( VehicleType vehicleType)
         {
             if (ModelState.IsValid)
             {
-                _context.Add(vehicleType);
-                await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    _context.Add(vehicleType);
+                    await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
+                }
+                catch (DbUpdateException dbUpdateException  )
+                {
+
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
+                    {
+                        ModelState.AddModelError(string.Empty, "Ya existe este tipo de vehiculo.");
+                        
+                    }
+                    else
+                    {
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
+                    }
+                    
+                }
+                catch(Exception exception)
+                {
+
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+
             }
             return View(vehicleType);
         }
@@ -86,7 +107,7 @@ namespace Vehicles.API.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Description")] VehicleType vehicleType)
+        public async Task<IActionResult> Edit(int id,  VehicleType vehicleType)
         {
             if (id != vehicleType.Id)
             {
@@ -99,19 +120,28 @@ namespace Vehicles.API.Controllers
                 {
                     _context.Update(vehicleType);
                     await _context.SaveChangesAsync();
+                    return RedirectToAction(nameof(Index));
                 }
-                catch (DbUpdateConcurrencyException)
+                catch (DbUpdateException dbUpdateException)
                 {
-                    if (!VehicleTypeExists(vehicleType.Id))
+
+                    if (dbUpdateException.InnerException.Message.Contains("duplicate"))
                     {
-                        return NotFound();
+                        ModelState.AddModelError(string.Empty, "Ya existe este tipo de vehiculo.");
+
                     }
                     else
                     {
-                        throw;
+                        ModelState.AddModelError(string.Empty, dbUpdateException.InnerException.Message);
                     }
+
                 }
-                return RedirectToAction(nameof(Index));
+                catch (Exception exception)
+                {
+
+                    ModelState.AddModelError(string.Empty, exception.Message);
+                }
+                
             }
             return View(vehicleType);
         }
@@ -131,19 +161,23 @@ namespace Vehicles.API.Controllers
                 return NotFound();
             }
 
-            return View(vehicleType);
-        }
-
-        // POST: VehicleTypes/Delete/5
-        [HttpPost, ActionName("Delete")]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> DeleteConfirmed(int id)
-        {
-            var vehicleType = await _context.VehicleTipes.FindAsync(id);
             _context.VehicleTipes.Remove(vehicleType);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
+
+            
         }
+
+        ////// POST: VehicleTypes/Delete/5
+        ////[HttpPost, ActionName("Delete")]
+        ////[ValidateAntiForgeryToken]
+        ////public async Task<IActionResult> DeleteConfirmed(int id)
+        ////{
+        ////    var vehicleType = await _context.VehicleTipes.FindAsync(id);
+        ////    _context.VehicleTipes.Remove(vehicleType);
+        ////    await _context.SaveChangesAsync();
+        ////    return RedirectToAction(nameof(Index));
+        ////}
 
         private bool VehicleTypeExists(int id)
         {
