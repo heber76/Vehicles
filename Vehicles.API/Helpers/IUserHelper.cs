@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Vehicles.API.Data.Entities;
+using Vehicles.API.Models;
 
 namespace Vehicles.API.Helpers
 {
@@ -17,6 +18,11 @@ namespace Vehicles.API.Helpers
         Task AddUserToRole(User user, string roleName);
 
         Task<bool> IsUserInToleAsync(User user, string roleName);
+
+        Task<SignInResult> LoginAsync(LoginViewModel model);
+        Task logoutAsync();
+
+
 
     }
 }
