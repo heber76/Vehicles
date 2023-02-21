@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Vehicles.Common.Enums;
 
@@ -40,7 +41,7 @@ namespace Vehicles.API.Data.Entities
 
         // TODO : Fix the image path
         public string ImageFullPath => ImageId == Guid.Empty
-            ? $"https://localhost:5001//images/NoImage.png"
+            ? $"https://localhost:5001/images/NoImage.png"
             : $"https://vehicles.blob.core.windows.net/users/{ImageId}";
 
         [Display(Name ="Tipo de usuario")]
@@ -48,5 +49,8 @@ namespace Vehicles.API.Data.Entities
 
         public string FullName => $"{FirstName} {LastName}";
 
+        public ICollection<Vehicle> Vehicles { get; set; }
+
+       // public ICollection<History> Histories { get; set; }
     }
 }

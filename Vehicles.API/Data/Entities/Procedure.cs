@@ -21,5 +21,7 @@ namespace Vehicles.API.Data.Entities
         
         public decimal Price { get; set; }
 
+        public ICollection<Detail> Details { get; set; }
+
     }
 }
