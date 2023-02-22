@@ -49,11 +49,11 @@ namespace Vehicles.API.Data
                     Email = email,
                     FirstName = firstName,
                     LastName = lastName,
-                    Documnent = document,
+                    Document = document,
                     DocumentType = _context.DocumentTypes.FirstOrDefault(x => x.Description == "Cédula"),
                     PhoneNumber = phoneNumber,
                     Address = address,
-                    UsrType = userType,
+                    UserType = userType,
                 };
 
                 await _userHelper.AddUserAsync(user, "123456");

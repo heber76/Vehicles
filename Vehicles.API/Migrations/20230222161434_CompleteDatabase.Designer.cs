@@ -10,8 +10,8 @@ using Vehicles.API.Data;
 namespace Vehicles.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    [Migration("20230221204603_completeDataBAse")]
-    partial class completeDataBAse
+    [Migration("20230222161434_CompleteDatabase")]
+    partial class CompleteDatabase
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -288,13 +288,13 @@ namespace Vehicles.API.Migrations
                         .IsConcurrencyToken()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("DocumentTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Documnent")
+                    b.Property<string>("Document")
                         .IsRequired()
                         .HasMaxLength(10)
                         .HasColumnType("nvarchar(10)");
+
+                    b.Property<int>("DocumentTypeId")
+                        .HasColumnType("int");
 
                     b.Property<string>("Email")
                         .HasMaxLength(256)
@@ -349,7 +349,7 @@ namespace Vehicles.API.Migrations
                         .HasMaxLength(256)
                         .HasColumnType("nvarchar(256)");
 
-                    b.Property<int>("UsrType")
+                    b.Property<int>("UserType")
                         .HasColumnType("int");
 
                     b.HasKey("Id");

@@ -3,10 +3,20 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace Vehicles.API.Migrations
 {
-    public partial class completeDataBAse : Migration
+    public partial class CompleteDatabase : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.RenameColumn(
+                name: "UsrType",
+                table: "AspNetUsers",
+                newName: "UserType");
+
+            migrationBuilder.RenameColumn(
+                name: "Documnent",
+                table: "AspNetUsers",
+                newName: "Document");
+
             migrationBuilder.CreateTable(
                 name: "Vehicles",
                 columns: table => new
@@ -171,6 +181,16 @@ namespace Vehicles.API.Migrations
 
             migrationBuilder.DropTable(
                 name: "Vehicles");
+
+            migrationBuilder.RenameColumn(
+                name: "UserType",
+                table: "AspNetUsers",
+                newName: "UsrType");
+
+            migrationBuilder.RenameColumn(
+                name: "Document",
+                table: "AspNetUsers",
+                newName: "Documnent");
         }
     }
 }

@@ -28,7 +28,7 @@ namespace Vehicles.API.Data.Entities
         [Required(ErrorMessage = "El campo{0} es obligatorio.")]
         [Display(Name = "Documento")]
         [MaxLength(10, ErrorMessage = "El campo {0} no puede tener mas de {1} carácteres.")]
-        public string Documnent { get; set; }
+        public string Document { get; set; }
 
 
         
@@ -39,18 +39,20 @@ namespace Vehicles.API.Data.Entities
         [Display(Name ="Foto")]
         public Guid ImageId { get; set; }
 
-        // TODO : Fix the image path
+        
         public string ImageFullPath => ImageId == Guid.Empty
             ? $"https://localhost:5001/images/NoImage.png"
-            : $"https://vehicles.blob.core.windows.net/users/{ImageId}";
+            : $"https://vehiclessusy.blob.core.windows.net/users/{ImageId}";
 
         [Display(Name ="Tipo de usuario")]
-        public UserType UsrType { get; set; }
+        public UserType UserType { get; set; }
 
         public string FullName => $"{FirstName} {LastName}";
 
         public ICollection<Vehicle> Vehicles { get; set; }
 
+        [Display(Name ="# Vehículos")]
+        public int VehiclesCount => Vehicles == null ? 0 : Vehicles.Count;
        // public ICollection<History> Histories { get; set; }
     }
 }

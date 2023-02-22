@@ -42,7 +42,9 @@ namespace Vehicles.API
 
             services.AddTransient<SeedDb>();
             services.AddScoped<IUserHelper, UserHelper>();
-
+            services.AddScoped<ICombosHelper, CombosHelper>();
+            services.AddScoped<IBlobHelper,BlobHelper>();
+            services.AddScoped<IConvertertHelper, ConvertertHelper>();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
