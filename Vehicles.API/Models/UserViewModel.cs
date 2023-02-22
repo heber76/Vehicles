@@ -56,7 +56,11 @@ namespace Vehicles.API.Models
         
         [Display(Name = "Tipo de usuario")]
         public UserType UserType { get; set; }
-        
+
+        public string ImageFullPath => ImageId == Guid.Empty
+          ? $"https://localhost:5001/images/NoImage.png"
+          : $"https://vehiclessusy.blob.core.windows.net/users/{ImageId}";
+
         public IFormFile ImageFile { get; set; }
 
         [Display(Name ="Tipo de Documento")]
@@ -66,6 +70,8 @@ namespace Vehicles.API.Models
 
 
         public IEnumerable<SelectListItem> DocumentTypes { get; set; }
+
+        
 
 
     }
