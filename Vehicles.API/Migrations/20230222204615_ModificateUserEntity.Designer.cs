@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Vehicles.API.Data;
 
 namespace Vehicles.API.Migrations
 {
     [DbContext(typeof(DataContext))]
-    partial class DataContextModelSnapshot : ModelSnapshot
+    [Migration("20230222204615_ModificateUserEntity")]
+    partial class ModificateUserEntity
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -237,15 +239,10 @@ namespace Vehicles.API.Migrations
                     b.Property<string>("Remarks")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("UserId")
-                        .HasColumnType("nvarchar(450)");
-
                     b.Property<int>("VehicleId")
                         .HasColumnType("int");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("UserId");
 
                     b.HasIndex("VehicleId");
 
@@ -534,17 +531,11 @@ namespace Vehicles.API.Migrations
 
             modelBuilder.Entity("Vehicles.API.Data.Entities.History", b =>
                 {
-                    b.HasOne("Vehicles.API.Data.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-
                     b.HasOne("Vehicles.API.Data.Entities.Vehicle", "Vehicle")
                         .WithMany("Histories")
                         .HasForeignKey("VehicleId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
-
-                    b.Navigation("User");
 
                     b.Navigation("Vehicle");
                 });

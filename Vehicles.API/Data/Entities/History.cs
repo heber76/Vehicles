@@ -15,11 +15,11 @@ namespace Vehicles.API.Data.Entities
         [Display(Name = "Vehículo")]
         public Vehicle Vehicle { get; set; }
 
-        //[Display(Name ="Mecanico")]
-        //[Required(ErrorMessage = "El campo{0} es obligatorio.")]
-        //public User user { get; set; }
+        [Display(Name = "Mecanico")]
+        [Required(ErrorMessage = "El campo{0} es obligatorio.")]
+        public User User { get; set; }
 
-        
+
         [Display(Name = "Fecha")]
         [DisplayFormat(DataFormatString ="{0:yyy/MM/dd}")]
         public DateTime Date { get; set; }

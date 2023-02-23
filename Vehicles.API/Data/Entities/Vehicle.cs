@@ -16,12 +16,12 @@ namespace Vehicles.API.Data.Entities
 
         [Required(ErrorMessage = "El campo{0} es obligatorio.")]
         [Display(Name = "Marca ")]
-        public Brand  BrandType { get; set; }
+        public Brand  Brand { get; set; }
 
         [Required(ErrorMessage = "El campo{0} es obligatorio.")]
         [Display(Name = "Modelo")]
         [Range(1900,3000,ErrorMessage ="Valor de modelo no válido.")]
-        public int Modelo { get; set; }
+        public int Model { get; set; }
 
         [Required(ErrorMessage = "El campo{0} es obligatorio.")]
         [Display(Name = "Placa")]
@@ -58,7 +58,7 @@ namespace Vehicles.API.Data.Entities
         
         [Display(Name = "Foto")]
         public string ImageFullPath => VehiclePhotos == null || VehiclePhotos.Count == 0
-            ? $"https://localhost:5001/images/NoImage.png"
+            ? $"https://localhost:5001/images/NoImage2.png"
             : VehiclePhotos.FirstOrDefault().ImageFullPath;
 
         public ICollection<History> Histories { get; set; }

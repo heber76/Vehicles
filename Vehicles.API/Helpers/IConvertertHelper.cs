@@ -13,6 +13,10 @@ public    interface IConvertertHelper
         Task<User> ToUserAsync(UserViewModel model, Guid imageId, bool IsNew);
         UserViewModel ToUserViewModel(User user);
 
+        Task<Vehicle> ToVehicleAsync(VehicleViewModel model, bool IsNew);
+        VehicleViewModel ToVehicleViewModel(Vehicle vehicle);
+
+
 
     }
 }
