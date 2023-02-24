@@ -41,22 +41,25 @@ namespace Vehicles.API.Helpers
 
         }
 
-        public UserViewModel ToUserViewModel(User user) => new UserViewModel
+        public UserViewModel ToUserViewModel(User user)
         {
+          return  new UserViewModel
+            {
 
-            Address = user.Address,
-            Document = user.Document,
-            //DocumentType = user.DocumentType,
-            DocumentTypeId = user.DocumentType.Id,
-            DocumentTypes = _combosHelper.GetComboDocumnetTypes(), 
-            Email = user.Email,
-            FirstName = user.FirstName,
-            Id = user.Id,
-            ImageId = user.ImageId,
-            LastName = user.LastName,
-            PhoneNumber = user.PhoneNumber,
-            UserType = user.UserType,
-        };
+                Address = user.Address,
+                Document = user.Document,
+                //DocumentType = user.DocumentType,
+                DocumentTypeId = user.DocumentType.Id,
+                DocumentTypes = _combosHelper.GetComboDocumnetTypes(),
+                Email = user.Email,
+                FirstName = user.FirstName,
+                Id = user.Id,
+                ImageId = user.ImageId,
+                LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                UserType = user.UserType,
+            };
+        }
 
         public async Task<Vehicle> ToVehicleAsync(VehicleViewModel model, bool IsNew)
         {
@@ -81,14 +84,15 @@ namespace Vehicles.API.Helpers
                 BrandId = vehicle.Brand.Id,
                 Brands = _combosHelper.GetComboBrand(),
                 Id = vehicle.Id,
-                Color= vehicle.Color,
-                Line= vehicle.Line,
-                Model= vehicle.Model,
-                Plaque= vehicle.Plaque,
-                Remarks=vehicle.Remarks,
+                Color = vehicle.Color,
+                Line = vehicle.Line,
+                Model = vehicle.Model,
+                Plaque = vehicle.Plaque,
+                Remarks = vehicle.Remarks,
                 UserId = vehicle.User.Id,
                 VehicleTypeId = vehicle.VehicleType.Id,
-              //  VehiclePhotos = vehicle.VehiclePhotos,
+                VehicleTypes = _combosHelper.GetComboVehicleTypes(),
+                VehiclePhotos = vehicle.VehiclePhotos,
             };
         
         }
