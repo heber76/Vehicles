@@ -1,0 +1,13 @@
+﻿@model Vehicles.API.Models.HistoryViewModel
+
+<div class="form-group">
+    <label asp-for="Miliage" class="control-label"></label>
+    <input asp-for="Miliage" class="form-control" />
+    <span asp-validation-for="Miliage" class="text-danger"></span>
+</div>
+
+<div class="form-group">
+    <label asp-for="Remarks" class="control-label"></label>
+    <textarea asp-for="Remarks" class="form-control"></textarea>
+    <span asp-validation-for="Remarks" class="text-danger"></span>
+</div>

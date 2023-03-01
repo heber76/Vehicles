@@ -10,6 +10,8 @@ namespace Vehicles.API.Helpers
 public    interface IConvertertHelper
     {
 
+        Task<Detail> ToDetailAsync(DetailViewModel model, bool isNew);
+        DetailViewModel ToDetailViewModel(Detail detail);
         Task<User> ToUserAsync(UserViewModel model, Guid imageId, bool IsNew);
         UserViewModel ToUserViewModel(User user);
 
